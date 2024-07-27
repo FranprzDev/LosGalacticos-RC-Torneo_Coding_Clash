@@ -17,37 +17,40 @@
 
     - Debes implementar la función `dividiendo(numero, veces)`
     - Sus parámetros son:
-    - numero: El número inicial, con el que Maru inicia el proceso.
-    - veces: La cantidad de veces que Maru dividirá por dos desde el número inicial.
-- La función debe retornar un entero: el resultado final luego de las divisiones.
-
+      - numero: El número inicial, con el que Maru inicia el proceso.
+      - veces: La cantidad de veces que Maru dividirá por dos desde el número inicial.
+    - La función debe retornar un entero: el resultado final luego de las divisiones.
 */
 
-function precise(x) {
-  return x.toPrecision(1);
-}
 
+// Función que realiza las divisiones
 function dividiendo(numero, veces) {
-//   if (typeof(numero) !== "Number") return null;
   if (numero < 0) return null;
+
   if (veces < 1) return null;
 
-  /* Constantes para la ejecución del programa */
+  // Constante para dividir el número
   const dividendo = 2;
+  // Almacenar el resultado
   let resultado = 0;
 
+  // Bucle que se repite la cantidad de veces indicada
   for (let i = 0; i < veces; i++) {
+    // Divide el número por 2 y redondea para abajo 
     resultado = Math.floor(numero / dividendo);
-    numero = Math.floor(resultado)
+    // Actualiza el número para la siguiente iteración
+    numero = Math.floor(resultado);
   }
 
+  // Retorna el resultado final luego de todas las divisiones
   return resultado;
 }
 
-console.log(dividiendo(7, 2));
-console.log(dividiendo(7, 0));
-console.log(dividiendo(15, -1));
-console.log(dividiendo(-10, -1));
-console.log("Numero es: (6)", dividiendo(13, 1));
-console.log("Numero es: (5)", dividiendo(10, 1));
-console.log("Numero es: (38)", dividiendo(38, 4));
+// Ejemplos de uso de la función
+console.log(dividiendo(7, 2)); 
+console.log(dividiendo(7, 0)); 
+console.log(dividiendo(15, -1)); 
+console.log(dividiendo(-10, -1)); 
+console.log("Numero es: (6)", dividiendo(13, 1)); 
+console.log("Numero es: (5)", dividiendo(10, 1)); 
+console.log("Numero es: (38)", dividiendo(38, 4)); 
