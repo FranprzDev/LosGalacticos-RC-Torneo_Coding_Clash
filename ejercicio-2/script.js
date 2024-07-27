@@ -49,21 +49,31 @@ y numero es un arreglo de exactamente 7 números.
 */
 
 function esMismoPalo(arrayPalos) {
+    let contador = 0
   let esChinchon = 0;
   for (let i = 0; i < arrayPalos.length; i++) {
-    console.log(arrayPalos[i]);
     if (arrayPalos[i] === arrayPalos[i + 1]) {
       esChinchon = true;
+      contador++;
     }
   }
 
-  return esChinchon;
+  return {
+    esChinchon,
+    contador
+  };
 }
 
-/* numero [6], palo [6] */
+function numeroConsecutivo(numero1, numero2) {
+  if (numero1 == numero2 - 1) return true;
+  if (numero2 === undefined) return true;
+  return false;
+}
+
 function chinchon(numero, palo) {
   if (numero.length !== 7) return null;
   if (palo.length !== 7) return null;
+  let puntos = 0;
 
   const arrayPalos = palo.toUpperCase().split("");
 
@@ -82,19 +92,40 @@ function chinchon(numero, palo) {
     */
   // Comparar si su jugada es chinchón
 
-  let esChinchon = esMismoPalo(arrayPalos)
-
-
+  let esChinchon = esMismoPalo(arrayPalos).esChinchon;
 
   if (esChinchon) {
-    const arrayPalosSort = arrayPalos.sort((a,b) => b - a)
+    let esConsecutivo = false;
+    const arrayNumero = numero.sort((a, b) => a - b);
 
-    console.log(arrayPalosSort)
+    for (let i = 0; i < arrayNumero.length; i++) {
+      if (arrayNumero[0] <= 6) {
+        if (i === arrayNumero.length - 1) break;
+        esConsecutivo = numeroConsecutivo(arrayNumero[i], arrayNumero[i + 1]);
+      }
+    }
+
+    if (esConsecutivo) puntos = -50;
   }
 
-  let puntos = 0;
+  /* Caso donde solo tenga piernas 
+    Usamos la misma que el chinchón
+  */
+
+
+
+
+  /* Caso donde solo tenga escalera */
 
   return puntos;
 }
 
-chinchon(["1", "2", "3", "4", "5", "6", "7"], "BBBBBBB");
+console.log(
+  chinchon(["1", "2", "3", "4", "5", "6", "7"], "BBBBBBB")
+); /* Es chinchón */
+console.log(
+  chinchon(["2", "3", "4", "5", "6", "7", "8"], "BBBBBBB")
+); /* Es chinchón */
+console.log(
+  chinchon(["2", "3", "4", "5", "11", "7", "8"], "BBBBBBB")
+); /* No es chinchón */
