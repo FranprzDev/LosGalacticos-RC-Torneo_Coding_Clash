@@ -23,15 +23,12 @@
 */
 
 
-// Función que realiza las divisiones
 function dividiendo(numero, veces) {
+  if(typeof(numero) !== "number") return null
   if (numero < 0) return null;
-
   if (veces < 1) return null;
 
-  // Constante para dividir el número
   const dividendo = 2;
-  // Almacenar el resultado
   let resultado = 0;
 
   // Bucle que se repite la cantidad de veces indicada
@@ -46,11 +43,11 @@ function dividiendo(numero, veces) {
   return resultado;
 }
 
-// Ejemplos de uso de la función
-console.log(dividiendo(7, 2)); 
-console.log(dividiendo(7, 0)); 
-console.log(dividiendo(15, -1)); 
-console.log(dividiendo(-10, -1)); 
-console.log("Numero es: (6)", dividiendo(13, 1)); 
-console.log("Numero es: (5)", dividiendo(10, 1)); 
+// Casos de prueba de la función
+console.log(dividiendo(7, 0)); // Devuelve null
+console.log(dividiendo(15, -1)); // Devuelve null
+console.log(dividiendo(-10, -1)); // Devuelve null
+console.log("Numero es: (1)", dividiendo(7, 2));
+console.log("Numero es: (6)", dividiendo(13, 1))  
+console.log("Numero es: (5)", dividiendo(10, 1));  
 console.log("Numero es: (38)", dividiendo(38, 4)); 
