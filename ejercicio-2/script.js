@@ -49,7 +49,7 @@ y numero es un arreglo de exactamente 7 números.
 */
 
 function esMismoPalo(arrayPalos) {
-    let contador = 0
+  let contador = 0;
   let esChinchon = 0;
   for (let i = 0; i < arrayPalos.length; i++) {
     if (arrayPalos[i] === arrayPalos[i + 1]) {
@@ -60,7 +60,7 @@ function esMismoPalo(arrayPalos) {
 
   return {
     esChinchon,
-    contador
+    contador,
   };
 }
 
@@ -70,27 +70,25 @@ function numeroConsecutivo(numero1, numero2) {
   return false;
 }
 
+function combinarArray(numero, palo) {
+  const combinedArray = [];
+  for (let i = 0; i < numero.length; i++) {
+    combinedArray.push({
+      numero: numero[i],
+      palo: palo[i],
+    });
+  }
+
+  return combinedArray;
+}
+
 function chinchon(numero, palo) {
   if (numero.length !== 7) return null;
   if (palo.length !== 7) return null;
   let puntos = 0;
+  const arrayCombinado = combinarArray(numero, palo);
 
   const arrayPalos = palo.toUpperCase().split("");
-
-  /*
-        Escalera
-        Pierna
-        Chinchón
-
-        1-7
-        2-8
-        3-9
-        4-10
-        5-11
-        6-12
-        comparamos con arraypalos
-    */
-  // Comparar si su jugada es chinchón
 
   let esChinchon = esMismoPalo(arrayPalos).esChinchon;
 
@@ -108,24 +106,45 @@ function chinchon(numero, palo) {
     if (esConsecutivo) puntos = -50;
   }
 
-  /* Caso donde solo tenga piernas 
-    Usamos la misma que el chinchón
+  /* 
+    Con el array combinado, voy matando los que no son iguales
   */
 
+  let arrayRecidual = []
+  let contador = 0
 
+  for (let i = 0; i < arrayCombinado.length; i++) {
+    contador = i
+    if(arrayCombinado.length < arrayCombinado.length-1){
+        if (arrayCombinado[i]?.numero !== arrayCombinado[i + 1]?.numero){
+            arrayRecidual.push(arrayCombinado[i+1]?.numero)
+        }
+    }else {
+        if (arrayCombinado[i]?.numero !== arrayCombinado[i + 1]?.numero){
+            arrayRecidual.push(arrayCombinado[i]?.numero)
+        }   
+    }
+  }
 
+  console.log("aray", arrayRecidual)
 
-  /* Caso donde solo tenga escalera */
+  for(let i = 0; i < arrayRecidual.length ; i++){
+    puntos = Number(arrayRecidual[i]) + puntos
+  }
 
   return puntos;
 }
 
-console.log(
-  chinchon(["1", "2", "3", "4", "5", "6", "7"], "BBBBBBB")
-); /* Es chinchón */
-console.log(
-  chinchon(["2", "3", "4", "5", "6", "7", "8"], "BBBBBBB")
-); /* Es chinchón */
-console.log(
-  chinchon(["2", "3", "4", "5", "11", "7", "8"], "BBBBBBB")
-); /* No es chinchón */
+// console.log(
+//   chinchon(["1", "2", "3", "4", "5", "6", "7"], "BBBBBBB")
+// ); /* Es chinchón */
+// console.log(
+//   chinchon(["2", "3", "4", "5", "6", "7", "8"], "BBBBBBB")
+// ); /* Es chinchón */
+// console.log(
+//   chinchon(["2", "3", "4", "5", "11", "7", "8"], "BBBBBBO")
+// ); /* No es chinchón */
+
+/* Pierna */
+
+console.log("Pierna (18)", chinchon(["2", "2", "2", "2", "3", "7", "8"], "BBBBBBO"));
