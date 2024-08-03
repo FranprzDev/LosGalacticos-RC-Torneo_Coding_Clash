@@ -40,17 +40,17 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g',
     'h', 'i','j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
      's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-function getPositionInAlphabet(letter, displacement){
+function getPositionInAlphabet(letter, displacement, length){
         console.log(letter)
         if(letter == ' ') return ' '
         if(!alphabet.includes(letter)) return null
-        
-
-        /* Realizar la validacion cuando se va afuera del index
-        eso quiere decir cuando el desplazamiento es 3 y se va hacia afuera 
-        x = a, y = b, z = c
-        */ 
+    
         const indexAlphabet = alphabet.findIndex((element) => element == letter)
+        if(indexAlphabet+displacement > length) {
+            // falta validar esto no llegamos con el tiempo
+            return alphabet[displacement]
+        }
+        
         return alphabet[indexAlphabet+displacement]
 }
 
@@ -58,15 +58,13 @@ function encryptionCesar(textEncryption, displacement) {
     if (textEncryption.length <= 0) return null
     if (displacement <= 0) return null
     let textEncrypted = []
-    console.log(textEncryption, displacement)
 
     for(let i = 0; i < textEncryption.length; i++){
-        console.log(textEncryption[i])
-        textEncrypted.push(getPositionInAlphabet(textEncryption[i], displacement))
-        // textEncrypted += getPositionInAlphabet(textEncryption[i], displacement)
+        textEncrypted.push(getPositionInAlphabet(textEncryption[i], displacement, textEncryption.length))
     }
 
-    return textEncrypted
+    return textEncrypted.join('')
 }
 
-console.log(encryptionCesar("hola mundo", 3))
+console.log(encryptionCesar("hola mundo", 3)) // krpd pxqgr
+console.log(encryptionCesar("x", 3)) // a
