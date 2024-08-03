@@ -29,9 +29,6 @@ Salida:
 - Agrega las palabras que cumplen la condición a un nuevo arreglo.
 */
 
-
-const palabras = ["casa", "perro", "gato", "elefante", "pez"];
-
 function findWordByCharacterLenght(words, n) {
     return words.filter((word) => word.length === n);
 }
@@ -39,6 +36,3 @@ function findWordByCharacterLenght(words, n) {
 // Casos de prueba:
 console.log(findWordByCharacterLenght(["casa", "perro", "gato", "elefante", "pez"], 4)) /* Casa y perro */
 console.log(findWordByCharacterLenght(["casa", "perro", "gato", "elefante", "pez"], 3)) /* Pez */
-
-
-  console.log(palabrasConLongitud(palabras, n)); // Salida: ["casa", "gato"
